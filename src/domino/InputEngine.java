@@ -101,7 +101,7 @@ class Keyboard extends KeyAdapter{
 		case KeyEvent.VK_PAGE_UP:
 			world.renderer.defaultLightPos.moveZ(1);	break;
 		case KeyEvent.VK_PAGE_DOWN:
-			world.renderer.defaultLightPos.moveZ(1);	break;
+			world.renderer.defaultLightPos.moveZ(-1);	break;
 	        
 		// Simulation key
 		case KeyEvent.VK_SPACE:
@@ -158,6 +158,8 @@ class Keyboard extends KeyAdapter{
 				world.superObject.removeAllChildren("Domino");
 			}
 			break;
+                case KeyEvent.VK_Q:
+                        world.stop();
 		}
 	}
 }
