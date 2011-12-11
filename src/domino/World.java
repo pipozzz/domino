@@ -57,6 +57,10 @@ public class World implements Runnable {
 	Vector<AudioClip> clickSounds = new Vector<AudioClip>();
 	AudioClip createSound;
 
+        
+        // Animator z run
+        private FPSAnimator animator;
+        
 	// World constructor will hold renderer, physics, canvas, and all listeners
 	public World(JFrame w, int width, int height) {
 		renderer = new RenderEngine(width, height, this);
@@ -79,11 +83,17 @@ public class World implements Runnable {
 	}
 
 	public void run() {
-		FPSAnimator animator = new FPSAnimator(canvas, fpsCap);
+		animator = new FPSAnimator(canvas, fpsCap);
 		animator.setRunAsFastAsPossible(true);
 		animator.start();
 	}
 
+        public void stop() {
+            animator.stop();
+            window.removeAll();
+            window.dispose();
+        }
+        
 	public void render(GL gl) {
 		//Setup shadow option
 		superObject.setLightPos(this.renderer.defaultLightPos);
