@@ -10,7 +10,7 @@ import com.sun.opengl.util.j2d.TextureRenderer;
 import static javax.media.opengl.GL.*;
 
 /**
- * 2D elements class for menus, text, object selection, etc.
+ * Element2D
  * 
  * @author pc1
  */
@@ -22,7 +22,7 @@ public class Element2D extends Element {
 		
 	private Vertex[] corner = new Vertex[4];
 
-	// This is used to generate textures using Graphics2D
+	// Pouzite na renderovanie textur pomocou Graphics2D
 	private TextureRenderer texRenderer;
 
 	public Element2D(String iden, int width, int height, int x, int y, GL gl){
@@ -42,14 +42,14 @@ public class Element2D extends Element {
 		this.x = x;
 		this.y = y;
 		
-		// Create a rectangular shaped polygon
+		// Vytvorenie obdliznika
 		this.corner[0] = new Vertex(0,0,0.0f);
 		this.corner[1] = new Vertex(0,height,0.0f);
 		this.corner[2] = new Vertex(width,height,0.0f);
 		this.corner[3] = new Vertex(width,0,0.0f);
 		
         texRenderer = new TextureRenderer(width, height, true);
-        //texRenderer.setSmoothing(false);
+   
 	}
 
 	public void render(){
@@ -83,7 +83,7 @@ public class Element2D extends Element {
 	public Graphics2D getGraphicsWithAlpha(){
 		Graphics2D g = texRenderer.createGraphics();
 		
-        // Clear with a transparent background
+        // Vycistenie s backgroundom
 		g.setComposite(AlphaComposite.Clear);
         g.fillRect(0, 0, width, height);
         g.setComposite(AlphaComposite.Src);
@@ -107,7 +107,7 @@ public class Element2D extends Element {
 		texRenderer.markDirty(0, 0, width, height);
 	}
 	
-	// This returns a 2D element from a point on the screen.
+	// Vracia Element2D ktory je na bode obrazovky
 	public Element2D isInside(int pointX, int pointY){
 		for (int i = child.size() - 1; i >= 0; i--){
 			Element2D e = (Element2D) child.get(i);
@@ -132,7 +132,7 @@ public class Element2D extends Element {
 		return null;
 	}
 	
-	// Check if a point is inside the 2D element.
+	// Kontroluje ci je bod v elemente
 	public boolean inside(int pointX, int pointY){
 		int parentX, parentY;
         parentX = parentY = 0;
@@ -149,7 +149,7 @@ public class Element2D extends Element {
 		return false;
 	}
 	
-	// Satisfy the abstract method
+	
 	public void renderShadow(){
 	}
 }

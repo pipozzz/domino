@@ -6,13 +6,8 @@ import java.util.Iterator;
 import javax.media.opengl.GL;
 
 /**
- * Parent class for 2D and 3D elements.
- * 
- * Attributes:
- * 	id			A textual identifier to identify distinct objects
- *  visible		Specify if an element should be rendered
- *  parent		Helps create hierarchical objects
- *  child		Part of the hierarchical model (holds all the children)
+ * Abstraktna trieda Element pre 2D a 3D
+ *
  * 
  * @author pc1
  */
@@ -107,7 +102,7 @@ public abstract class Element {
 		}
 	}
 	
-	// Remove all children with IDs staring with 'childId'
+	// Vymazanie vsetkych dedicov
 	public void removeAllChildren(String childId){
 		for (int i = 0; i < child.size(); i++){
 			Element e = child.get(i);
@@ -118,5 +113,5 @@ public abstract class Element {
 	}
 	
 	public abstract void render();
-	public abstract void renderShadow();	// Specific to Element3D
+	public abstract void renderShadow();
 }

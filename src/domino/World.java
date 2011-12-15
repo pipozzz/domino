@@ -54,8 +54,8 @@ public class World implements Runnable {
 	public boolean shadowOn = false;
 	
 	// Sounds
-	Vector<AudioClip> clickSounds = new Vector<AudioClip>();
-	AudioClip createSound;
+	//Vector<AudioClip> clickSounds = new Vector<AudioClip>();
+	//AudioClip createSound;
 
         
         // Animator z run
@@ -73,8 +73,7 @@ public class World implements Runnable {
 
 		canvas.addGLEventListener(renderer);
 
-		canvas.addMouseMotionListener(input.mouse);
-		canvas.addMouseListener(input.mouse);
+		
 		canvas.addKeyListener(input.keyboard);
 
 		window.add(canvas);
@@ -112,7 +111,7 @@ public class World implements Runnable {
 
 		Element3D e;
 
-		addLineDominoes(5, WEST);
+		addLineDominoes(10, WEST);
 
 		e = Element3D.loadObj("media/objects/floor.obj",
 				"media/textures/floor.jpg", "Floor", 1.5f, renderer.gl);
@@ -124,31 +123,12 @@ public class World implements Runnable {
 		e.moveTo(new Vertex(0, 0, 0));
 		add(e);
 		
-		// Load sound effects
-		String path = "media/sounds/clicks";
-		File dir = new File(path);
-		int numOfFiles = dir.list().length;
 		
-		for (int i = 0 ; i < numOfFiles; i++){
-			clickSounds.add(loadSoundFile(path + "/" + dir.list()[i]));
-		}
 		
-		createSound = loadSoundFile("media/sounds/create.wav");
+		
 	}
 	
-	public AudioClip loadSoundFile(String fileName){
-		File file = new File(fileName);
-		URL url = null;
-		
-		try{
-			url = file.toURI().toURL();
-		}catch(Exception ex){
-			System.out.println(ex.getMessage());
-			return null;
-		}
-		
-		return java.applet.Applet.newAudioClip(url);
-	}
+	
 
 	// adds element to superObject. most likely a domino
 	public void add(Element3D e) {
@@ -297,8 +277,7 @@ public class World implements Runnable {
 			dominoes.add(e);
 			superObject.add(e);
 			
-			if (createSound != null)
-				createSound.play();
+			
 		}
 	}
 

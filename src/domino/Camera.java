@@ -4,7 +4,7 @@ import javax.media.opengl.*;
 import javax.media.opengl.glu.*;
 
 /**
- * This class represents cameras.
+ * Tato trieda reprezentuje kameru.
  * 
  * @author pc1
  *
@@ -24,15 +24,15 @@ public class Camera {
 	public Camera(GL gl, GLU glu, int width, int height){
         this.glu = glu;
         
-        // Default values
+        // Defaultne hodnoty
 		fovAngle = 50.0f;
         aspectRatio = (float)width / (float)height;
         nearZ = 1.0f;
         farZ = 1000.0f;
         
-        // These locations are used by the 'gluLookAt' method
+        // miesta na nastavenie kamery
         lookAt = new Vertex(0,0,0);
-        lookFrom = new Vertex(5,5,5);
+        lookFrom = new Vertex(5,5,25);
 	}
 	
 	public void set(GL gl){
@@ -41,7 +41,7 @@ public class Camera {
         gl.glLoadIdentity();
         glu.gluPerspective(fovAngle, aspectRatio , nearZ, farZ);
         
-        // Position the camera
+        // Pozicia kamery
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
         glu.gluLookAt(lookFrom.x, lookFrom.y, lookFrom.z, 

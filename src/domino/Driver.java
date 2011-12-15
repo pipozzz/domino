@@ -5,7 +5,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 /**
- * This class is used to start an instance of our World.
+ * Tato trieda sa pouziva na zapnutie sveta
  * 
  * @author pc1
  *
@@ -35,6 +35,6 @@ class Window extends JFrame {
                 Driver.myWorld.stop();
             }
         });
-        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    
     }
 }

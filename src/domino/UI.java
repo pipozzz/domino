@@ -57,11 +57,13 @@ public class UI {
 
 		contentPanel.add(new Element2D("ImageBox", 256, 256, width - 256, 0, gl));
 		
-		contentPanel.add(new MessageBox("MsgBox1",contentPanel, "Welcome :)",
+		/*contentPanel.add(new MessageBox("MsgBox1",contentPanel, "Welcome :)",
 				"Press 'Space' to start, 'r' to reset", width, height,gl));
 		
+                 * 
+                 */
         try{
-            sampleImage = ImageIO.read(new File("media/texture.png"));
+            sampleImage = ImageIO.read(new File("media/logo-fei.png"));
         }catch(Exception e){
         	System.out.println(e.getMessage());
         }
@@ -76,32 +78,6 @@ public class UI {
         
 		contentPanel.renderAll();
 		
-		drawConsole();
-		
-        // SAMPLE CODE
-        // PNG Image loading
-		Element2D e = get("ImageBox");
-		
-		// This should be done in something link 'UI.load()'
-		if(drawOnce){
-	        Graphics2D g = e.getGraphicsWithAlpha();
-	        
-	        g.drawImage(sampleImage, 0, 0, 256, 256, null);
-	     
-	        e.redrawTexture();
-	        e.setTransperncy(0.4f);
-	        
-	        drawOnce = false;
-		}
-        
-		// Draw FPS
-		textEngine.beginRendering(width, height);
-		textEngine.setColor(0.75f, 0.75f, 0.75f, 1.0f);
-		textEngine.draw("FPS: " + world.renderer.fps , 5, height - 15);  
-		textEngine.draw("Arrow keys generate pieces.", 5, height - 29);
-		textEngine.draw("Other Keys: r, c, space, z, x, s.", 5, height - 48);
-
-		textEngine.endRendering();
 	}
 	
 	public Element2D get(String id){
@@ -148,38 +124,5 @@ public class UI {
 		contentPanel.add(e);
 	}
 	
-	public void manage(){
-		// Optimize: by skipping if the mouse is already on element
-		if (currentElement != null){
-			if (currentElement instanceof ElementGUI){
-				ElementGUI eleGUI = (ElementGUI)currentElement;
-				
-				if (!eleGUI.inside(world.input.x, world.input.y+32)){
-					eleGUI.setStyle(1);  // Mouse is out of the object
-				}
-			}
-		}
-		
-		// Get the element with the mouse's on top
-		currentElement = (Element2D) contentPanel.isInside(world.input.x, world.input.y+32);
-		
-		// Manage interactions (buggy)
-		if (currentElement != null){
-			writeLine(currentElement.id);
-			
-			if (currentElement instanceof ElementGUI){
-				ElementGUI eleGUI = (ElementGUI)currentElement;
-
-				if(world.input.MouseButtonPressed)
-					eleGUI.setStyle(ElementGUI.PRESSED);
-				else
-					eleGUI.setStyle(ElementGUI.HOVER);
-				
-				if (world.input.MouseReleased){
-					world.input.MouseReleased = false;
-					eleGUI.action();
-				}
-			}
-		}		
-	}
+	
 }

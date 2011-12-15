@@ -28,7 +28,7 @@ public class Light {
 	public Light(int num) {
 		lightNum = num;
 
-		lightColor = Color.white;
+		lightColor = Color.WHITE;
 		lightPos = new Vertex(0,0,0);
 	}
 	
@@ -48,7 +48,7 @@ public class Light {
 
         gl.glLightfv(lightNumber, GL_AMBIENT, lightAmbient, 0);
         gl.glLightfv(lightNumber, GL_DIFFUSE, lightDiffuse, 0);
-        //gl.glLightfv(lightNumber, GL_SPECULAR, lightSpecular, 0);
+
         gl.glLightfv(lightNumber, GL_POSITION, lightPosition, 0);
 		
         gl.glEnable(GL_LIGHTING);

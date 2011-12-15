@@ -17,7 +17,7 @@ import com.sun.opengl.util.texture.*;
 import static javax.media.opengl.GL.*;
 
 /**
- * This class represent all visible 3D objects in the world.
+ * Reprezentuje 3D objekt
  * @author pc1
  *
  */
@@ -37,17 +37,16 @@ public class Element3D extends Element {
 	public float width;
 	public float height;
 
-	// Default values for 3D objects
+	// Defaultne hodnoty
 	private int polyType = GL_QUADS;
 	private int shadeMode = GL_SMOOTH;
 	private boolean wireFrame = false;
 	private Texture texture = null;
 
-	// Used for simulation, if its alive it will move
+	// pouzite pri simulacii
 	public boolean alive = true;
 	private int direction;
 
-	// Shadow settings
 	public Vertex lightPos = null;
 	public boolean castShadow = true;
 
@@ -58,7 +57,7 @@ public class Element3D extends Element {
 	public Element3D(String iden, Element3D parent, GL gl) {
 		super(iden, parent, gl);
 
-		// Position in the center of the world
+		// pozicia stredu sveta
 		center = new Vertex(0, 0, 0);
 		rotate = new Vertex(0, 0, 0);
 	}
@@ -188,21 +187,19 @@ public class Element3D extends Element {
 		while (i.hasNext()) {
 			Vertex v = i.next();
 
-			// Setup the texture coordinates
+			// nastavenie text. koordinatov
 			if (texCoord.hasNext() && texture != null) {
 				Vertex uv = texCoord.next();
 
 				gl.glTexCoord2f(uv.x, uv.y);
 			}
 
-			// Setup the normals
+			// nastavenie normal
 			if (norm.hasNext()) {
 				Vertex n = norm.next();
 				gl.glNormal3f(n.x, n.y, n.z);
 			}
-			//gl.glEnable(GL_NORMALIZE);
-
-			// Draw the vertex
+		
 			gl.glVertex3f(v.x, v.y, v.z);
 		}
 	}
@@ -246,7 +243,7 @@ public class Element3D extends Element {
 		Vector<Edge> contour = findShadowEdges();
 		renderShadowVolume(contour);
 
-		//renderEdgeList(contour);      
+		     
 	}
 
 	public void renderShadowVolume(Vector<Edge> contour) {
@@ -418,8 +415,7 @@ public class Element3D extends Element {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
-		//Color[] colors = {Color.red, Color.blue, Color.green,
-		//              Color.yellow, Color.orange, Color.blue, Color.blue};
+	
 
 		Random r = new Random();
 		int number = r.nextInt(6);
@@ -427,7 +423,6 @@ public class Element3D extends Element {
 		int width, height;
 		width = height = 128;
 
-		//g.setColor(colors[number].darker());
 
 		g.setColor(Color.white);
 		g.fillRect(0, 0, width, height);
@@ -440,11 +435,11 @@ public class Element3D extends Element {
 		g.setTransform(t);
 		g.setColor(Color.black);
 
-		number = r.nextInt(7);
-		drawPattern(0, 0, number, width / 2, height / 2, g);
-
-		number = r.nextInt(7);
-		drawPattern(0, height / 2, number, width / 2, height / 2, g);
+//		number = r.nextInt(7);
+//		drawPattern(0, 0, number, width / 2, height / 2, g);
+//
+//		number = r.nextInt(7);
+//		drawPattern(0, height / 2, number, width / 2, height / 2, g);
 
 		g.translate(0, -height / 2);
 		g.setColor(Color.black);

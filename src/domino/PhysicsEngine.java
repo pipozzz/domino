@@ -13,8 +13,7 @@ import java.util.Random;
 public class PhysicsEngine {
 
 	private World world;
-	//private float gravity;
-	//private float friction;
+
 	public Element3D[] domCollision;
 	
 	public float[] red = {1.0f,0, 0};
@@ -34,14 +33,12 @@ public class PhysicsEngine {
 
 	public PhysicsEngine(World world) {
 		this.world = world;
-		//gravity = -9.8f;
-		//friction = 1;		
+		
 		collisionSolver();
 	}
 	
 	public void run() {
-		// abandoned part of the project
-		//collisionSolver();
+	
 
 		if (simulationRunning){
 			if (world.renderer.fps < 65){
@@ -77,16 +74,8 @@ public class PhysicsEngine {
 				
 				// Limit Rotations
 				if (Math.abs(d.rotate.x) + Math.abs(d.rotate.y) > 60){
-					if ((i) !=  world.dominoes.size()-1){
-						int random = Math.abs(new Random().nextInt() 
-										% world.clickSounds.size());
-						
-						if (d.alive == true)
-							world.clickSounds.get(random).play();
-						
-						d.alive = false;
-					}
-					else if(Math.abs(d.rotate.x) + Math.abs(d.rotate.y) > 70){
+					
+					if(Math.abs(d.rotate.x) + Math.abs(d.rotate.y) > 70){
 						
 						d.alive = false;
 					}
@@ -169,11 +158,7 @@ public class PhysicsEngine {
 			}
 		}				
 	    
-		/*for (int i = 0; i < 8 ; i++)
-			drawLine(a.bound[i], a.center, red);
 		
-		for (int i = 0; i < 8 ; i++)
-			drawLine(b.bound[i], b.center, red);*/
 		
 		Vertex aX = new Vertex(a.center);	aX.x = av.x;
 		Vertex aY = new Vertex(a.center);	aY.y = av.y;
