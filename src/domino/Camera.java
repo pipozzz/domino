@@ -20,19 +20,22 @@ public class Camera {
 	
 	public Vertex lookAt;
 	public Vertex lookFrom;
-	
+        public float angle = 0.0f ;
+	public float distance = 30.0f;
+        
 	public Camera(GL gl, GLU glu, int width, int height){
         this.glu = glu;
         
         // Defaultne hodnoty
-		fovAngle = 50.0f;
+		fovAngle = 60.0f;
         aspectRatio = (float)width / (float)height;
-        nearZ = 1.0f;
+        nearZ = 10.0f;
         farZ = 1000.0f;
         
         // miesta na nastavenie kamery
         lookAt = new Vertex(0,0,0);
-        lookFrom = new Vertex(5,5,25);
+        lookFrom = new Vertex(0,20,30);
+        distance = lookFrom.distanceTo(lookAt);
 	}
 	
 	public void set(GL gl){
@@ -87,4 +90,63 @@ public class Camera {
 	public void setFar(float far){
 		this.farZ = far;
 	}
+        
+        public void rotateLeft(float offset){
+        
+            System.out.println(distance);
+                        angle -= offset;
+			float x = (float) Math.cos(Math.toRadians(angle)); 
+			float y = (float) Math.sin(Math.toRadians(angle));
+
+			x *= distance;
+			y *= distance;
+
+			lookFrom.x = x + lookAt.x;
+			lookFrom.y = y + lookAt.y;
+        }
+        
+        public void rotateRight(float offset){
+        
+        System.out.println(distance);
+                        angle += offset;
+			float x = (float) Math.cos(Math.toRadians(angle)); 
+			float y = (float) Math.sin(Math.toRadians(angle));
+
+			x *= distance;
+			y *= distance;
+
+			lookFrom.x = x + lookAt.x;
+			lookFrom.y = y + lookAt.y;
+        }
+        
+        public void goNear(float offset){
+            if(distance > 5.0) {
+            System.out.println(distance);
+            distance -= offset;
+                        
+			float x = (float) Math.cos(Math.toRadians(angle)); 
+			float y = (float) Math.sin(Math.toRadians(angle));
+            
+                        x *= distance;
+			y *= distance;
+
+			lookFrom.x = x + lookAt.x;
+			lookFrom.y = y + lookAt.y;
+            }
+        }
+      
+        public void goFar(float offset){
+            
+            System.out.println(distance);
+            distance += offset;
+                        
+			float x = (float) Math.cos(Math.toRadians(angle)); 
+			float y = (float) Math.sin(Math.toRadians(angle));
+            
+                        x *= distance;
+			y *= distance;
+
+			lookFrom.x = x + lookAt.x;
+			lookFrom.y = y + lookAt.y;
+        }
 }

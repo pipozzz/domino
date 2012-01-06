@@ -23,7 +23,7 @@ public class RenderEngine implements GLEventListener{
 	
 	public Camera currentCamera;
 	public Vertex defaultLightPos = new Vertex(5, 5, 25);
-	
+	public Vertex cameraPosition = new Vertex(0,20,30);
 	public UI ui;
 	
 	public int fps;
@@ -37,7 +37,7 @@ public class RenderEngine implements GLEventListener{
 	public float rotAngle = 45.0f;
 	public float rotSpeed = 1.01f;
 	public float rotDirection = -1;
-	
+	public float angle = 0.0f;
 	public float defaultRotSpeed = 1.01f;
 
 	
@@ -66,9 +66,9 @@ public class RenderEngine implements GLEventListener{
 
         // defaultna kamera
         currentCamera = new Camera(gl, glu, width, height);
-        currentCamera.lookFrom(new Vertex(17.67767f,37,30));
+        currentCamera.lookFrom(cameraPosition);
         currentCamera.lookAt(new Vertex(0,0,0));
-        
+        currentCamera.angle = 0;
         // Pouzivatelske rozhranie
         ui = new UI (width, height, gl, glu, this.world);
 
@@ -88,7 +88,7 @@ public class RenderEngine implements GLEventListener{
         gl.glClear(GL_COLOR_BUFFER_BIT);
         gl.glClear(GL_DEPTH_BUFFER_BIT);
         
-     
+        //gl.glLoadIdentity();
         currentCamera.set(gl);
         
         

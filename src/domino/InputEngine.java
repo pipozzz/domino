@@ -80,6 +80,24 @@ class Keyboard extends KeyAdapter{
                 // Vypnutie 
                 case KeyEvent.VK_Q:
                         world.stop();
+                   
+                case KeyEvent.VK_RIGHT:
+                    world.renderer.currentCamera.rotateRight(3.0f);
+                    break;
+                
+                case KeyEvent.VK_LEFT:
+                    //world.renderer.currentCamera.lookAt.moveX(-5.0f);
+                    world.renderer.currentCamera.rotateLeft(3.0f);
+                    break;
+                
+                case KeyEvent.VK_UP:
+                    world.renderer.currentCamera.goNear(0.5f);
+                    break;
+                
+                case KeyEvent.VK_DOWN:
+                    //world.renderer.currentCamera.lookAt.moveX(-5.0f);
+                    world.renderer.currentCamera.goFar(0.5f);
+                    break;
 		}
 	}
 }
