@@ -1,5 +1,6 @@
 package domino;
 
+import com.sun.org.apache.bcel.internal.generic.LoadClass;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
@@ -64,8 +65,10 @@ class Keyboard extends KeyAdapter{
 			}
 		break;
 		
-				
-							
+                case KeyEvent.VK_X:
+                    if(world.dominoes.isEmpty())
+                    world.loadDominoFromFile(world.FILE);
+				break;			
 		
 		// Vymazanie domina
 		case KeyEvent.VK_C:

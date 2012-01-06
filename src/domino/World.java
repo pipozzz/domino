@@ -3,8 +3,6 @@ package domino;
 import com.sun.opengl.util.*;
 
 import java.io.*;
-import java.net.URL;
-import java.applet.AudioClip;
 
 import javax.media.opengl.*;
 import javax.swing.*;
@@ -33,7 +31,8 @@ public class World implements Runnable {
 	public GLAutoDrawable gLDrawable;
 
 	public Element3D superObject;
-
+        public static final String FILE = "domino.txt";  
+        
 	public int fpsCap = 80;
 
 	public Vector<Element3D> dominoes = new Vector<Element3D>();
@@ -111,8 +110,9 @@ public class World implements Runnable {
 
 		Element3D e;
 
-		addLineDominoes(10, WEST);
-
+		//addLineDominoes(10, WEST);
+                loadDominoFromFile(FILE);
+                
 		e = Element3D.loadObj("media/objects/floor.obj",
 				"media/textures/floor.jpg", "Floor", 1.5f, renderer.gl);
 		e.moveTo(new Vertex(0, 0, 0));
@@ -396,7 +396,7 @@ public class World implements Runnable {
 			angle += angleStep;
 			angleZ += angleStep;
 
-			e = Element3D.createDomino("Domino" + dominoes.size(), renderer.gl);
+			e = Element3D.createDomino("Domino" + String.valueOf(i), renderer.gl);
 
 			x += Math.cos(Math.toRadians(angle));
 			y += Math.sin(Math.toRadians(angle));
@@ -409,4 +409,60 @@ public class World implements Runnable {
 			superObject.add(e);
 		}
 	}
+        
+        public void loadDominoFromFile(String file){
+        FileInputStream fis = null;
+        int count;
+        String[] line;
+        float x, y, z;
+        int direction = 0;
+        
+        try {
+            fis = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            count = Integer.parseInt(br.readLine());
+            System.out.println(count);
+            for(int iterator = 0 ; iterator < count; iterator++){
+                line = br.readLine().split("\\s");
+                if(line.length != 4) System.out.println("Bad format of input file");
+                
+                x = Float.parseFloat(line[0]);
+                y = Float.parseFloat(line[1]);
+                z = Float.parseFloat(line[2]);
+                switch(line[3].charAt(0)){
+                    case 'N': direction = NORTH; break;
+                    case 'S': direction = SOUTH; break;
+                    case 'W': direction = WEST; break;
+                    case 'E': direction = EAST; break;                   
+                            
+                }
+                
+               addDomino(iterator, x, y, z, direction); 
+            }
+         fis.close();           
+        } 
+        catch (IOException ex) {
+            System.out.println("Cannot read from input file");
+        } 
+        
+        }
+        
+        
+        
+        private void addDomino(float id, float x, float y, float z, int direction){
+            Element3D e;		
+
+		e = Element3D.createDomino("Domino" + String.valueOf(id), renderer.gl);
+                e.setDirection(direction);
+		e.moveTo(new Vertex(x, y, z));
+		e.rotate.z = direction;	
+
+		dominoes.add(e);
+		superObject.add(e);
+			
+			
+		
+            
+        }
+        
 }
