@@ -429,12 +429,21 @@ public class World implements Runnable {
                 x = Float.parseFloat(line[0]);
                 y = Float.parseFloat(line[1]);
                 z = Float.parseFloat(line[2]);
+                if(line[3].length() == 1) {
                 switch(line[3].charAt(0)){
                     case 'N': direction = NORTH; break;
                     case 'S': direction = SOUTH; break;
                     case 'W': direction = WEST; break;
-                    case 'E': direction = EAST; break;                   
+                    case 'E': direction = EAST; break;
+                    
                             
+                }
+                } else {
+                if (line [3].equals("NE")) direction = NE;
+                if (line [3].equals("NW")) direction = NW;
+                if (line [3].equals("SE")) direction = SE;
+                if (line [3].equals("SW")) direction = SW;
+                
                 }
                 
                addDomino(iterator, x, y, z, direction); 
