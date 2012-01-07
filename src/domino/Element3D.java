@@ -2,8 +2,6 @@ package domino;
 
 import javax.media.opengl.GL;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.*;
 import java.io.*;
 
